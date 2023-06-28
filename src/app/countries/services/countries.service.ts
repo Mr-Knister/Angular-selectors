@@ -42,6 +42,7 @@ export class CountriesService {
       );
   }
   getCountryBordersByCodes(borders:string[]):Observable<SmallCountry[]> {
+    if (!borders || borders.length === 0) return of([]);
     const url:string = `${this.baseUrl}/alpha?codes=${borders.join(",")}&fields=cca3,name,borders`;
     return this.httpClient.get<Country[]>(url)
       .pipe(
